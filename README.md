@@ -13,6 +13,6 @@ Program that allows you to download song from YouTube (using Spotify list)
 youtubedl, youtubesearchpython
 You can download them by commands:
 ```
-pip install youtube_dl
+pip install yt_dlp
 pip install youtube-search-python
 ```
