@@ -1,5 +1,5 @@
 import csv
-import youtube_dl
+import yt_dlp
 from youtubesearchpython import VideosSearch
 import os
 
@@ -32,7 +32,7 @@ class Track:
 
 tracks = []
 
-# creates folder it it doesn't exist
+# creates folder if it doesn't exist
 if not os.path.isdir('./Downloaded/'):
     os.system('mkdir Downloaded')
 
@@ -52,7 +52,7 @@ for track in tracks:
     url = videosSearch.result()['result'][0]['link']
 
     # downloads song
-    with youtube_dl.YoutubeDL(YDL_OPTS) as ydl:
+    with yt_dlp.YoutubeDL(YDL_OPTS) as ydl:
         ydl.download([url])
 
     # looks for downloaded file in current directory
