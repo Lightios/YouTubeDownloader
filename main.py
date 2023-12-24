@@ -57,12 +57,12 @@ def download_track(track):
         video_title = video_info['id']
         filename = f"{video_title}"
 
-        os.rename(f"{filename}*", f"{track.title}.mp3")
+        os.system(f'move "{filename}*" "{track.title}.mp3"')
 
         artist_dir = Path(f'./Downloaded/{track.artist}')
         artist_dir.mkdir(parents=True, exist_ok=True)
 
-        os.rename(f"{track.title}.mp3", artist_dir / f"{track.title}.mp3")
+        os.system(f'move "{track.title}.mp3" "Downloaded/{track.artist}/{track.title}.mp3"')
 
 
 def main():
@@ -70,7 +70,7 @@ def main():
 
     with open('todownload.csv', encoding="utf-8", newline='') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
-        tracks = [Track(row[2], row[4].replace(',', '')) for i, row in enumerate(csv_reader) if i > 0]
+        tracks = [Track(row[2], row[4].split(',')[0]) for i, row in enumerate(csv_reader) if i > 0]
 
     with ThreadPoolExecutor(max_workers=5) as executor:
         executor.map(download_track, tracks)
